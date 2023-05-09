@@ -2,7 +2,7 @@
 
 Debut le 17 avril 2023
 
-## **INTRODUCTION**
+## **INTRODUCTION :**
 
 Les pipes : les pipes sont des mécanismes de communication interprocessus (IPC) qui permettent de transférer le flux de données d'un processus à un autre. Dans le contexte de Pipex, je vais utiliser les pipes pour transférer le flux de données entre les deux fichiers et les deux commandes.
 
