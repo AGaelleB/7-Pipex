@@ -1,0 +1,6 @@
+TO DO
+
+- en premier voir comment fonctionnent les processus, c'est quoi les variables d'environnement, un pipe
+- essayez de faire fonctionner execve 
+- après comment ça fonctionne de créer des processus fils avec un fork
+- ensuite comment fonctionne le pipe (la redirection de l'entrée/sortie avec le pipe)
