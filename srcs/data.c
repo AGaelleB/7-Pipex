@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/10 14:37:52 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:36:31 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,25 @@ char	**ft_get_paths(char **envp, t_data	*data) // stock les paths
 	return (data->all_paths);
 }
 
-char	**ft_get_argc(int ac, char **av, t_data	*data) // stock les argc
-{
-	int		i;
 
-	i = 1;
-	while(i < ac)
-	{
-		data->all_argcs = ft_split(av[i], ' ');
-		printf("argc = %s\n", *data->all_argcs); // test impression argc
-		i++;
-	}
+
+char	**ft_get_argc(char **cmd1, char **cmd2, t_data	*data) // stock les argc
+{
+
 	return (data->all_argcs);
 }
+
+
+// char	**ft_get_argc(int ac, char **av, t_data	*data) // stock les argc
+// {
+// 	int		i;
+
+// 	i = 1;
+// 	while(i < ac)
+// 	{
+// 		data->all_argcs = ft_split(av[i], ' '); // av[1] av[2]
+// 		printf("argc = %s\n", *data->all_argcs); // test impression argc
+// 		i++;
+// 	}
+// 	return (data->all_argcs);
+// }
