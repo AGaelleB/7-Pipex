@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/04/17 11:02:26 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:38:43 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,25 @@
 # include "../includes/get_next_line.h"
 # include "../includes/libft.h"
 
+
+typedef struct s_data
+{
+	char	**all_paths;
+	char	**all_argcs;
+}	t_data;
+
+
 /********************************* pipex.c ************************************/
+
+
+/********************************* utils.c ************************************/
+
+int	ft_strncmp_pipex(char *s1, char *s2, int n);
+
+/********************************* utils.c ************************************/
+
+char	**ft_get_paths(char **envp, t_data	*data);
+char	**ft_get_argc(int ac, char **av, t_data	*data);
 
 
 #endif

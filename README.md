@@ -17,7 +17,10 @@ Le concept clé de Pipex est de réaliser le transfert de données entre deux fi
 - PPID : $ echo "PID = $$; PPID = $PPID"
 - Voir tous les processus actifs : $ ps -e
 - Tuer les processus fils : int kill(pid_t pid, int sig);
-    il faut ajouter la lib <signal.h> 
+    -> il faut ajouter la lib <signal.h> 
+- Check your fds currently open : ls -la /proc/$$/fd
+- Check whether the command exists and is executable : access()
+
 
 ## **PIPE :**
 
