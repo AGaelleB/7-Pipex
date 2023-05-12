@@ -21,10 +21,27 @@ Le concept clé de Pipex est de réaliser le transfert de données entre deux fi
 - Check your fds currently open : ls -la /proc/$$/fd
 - Check whether the command exists and is executable : access()
 
+**=> TEST :**
+valgrind --track-origins=yes --trace-children=yes --track-fds=yes --leak-check=full env -i ./pipex /dev/stdin "ls" "cat -e" /dev/stdout
+
 
 ## **PIPE :**
 
 En cas de succès, pipe renvoie 0. 
 Par contre en cas d’échec, il renvoie -1, décrit l’erreur rencontrée dans errno, 
 et ne remplit pas le tableau fourni.
+
+0 = entre standard.
+1 = sortie standard.
+2 = sortie d'erreur.
+
+
+
+## **FORK :**
+
+La fonction fork() va dupliquer le processus courant. 
+Lorsque l'ont va arriver au fork(), un nouveau processus identique au premier va être créer. C'est un peu comme si on se retrouvait a avoir lance deux fois le même programme. Sauf que fork() retourne un pid. 
+Si le pid retourné est égal a 0, on est dans le processus qui vient d’être crée (processus fils). 
+Sinon, le pid est égal au pid du processus fils.
+
 

@@ -6,15 +6,15 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/10 17:32:54 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:04:11 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
+// # define INT_MAX 2147483647
+// # define INT_MIN -2147483648
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"
@@ -43,7 +43,7 @@
 typedef struct s_cmd
 {
 	char	*path;
-	char	*args;
+	char	**args;
 }	t_cmd;
 
 typedef struct s_data
@@ -65,7 +65,8 @@ int	ft_strncmp_pipex(char *s1, char *s2, int n);
 /********************************* utils.c ************************************/
 
 char	**ft_get_paths(char **envp, t_data	*data);
-char	**ft_get_argc(int ac, char **av, t_data	*data);
-
+// char	**ft_get_argc(int ac, char **av, t_data	*data);
+// int	**ft_get_argcs(t_cmd **cmd1, t_cmd **cmd2, t_data *data); // stock les argc
+int	ft_get_argcs(char **argv, t_cmd *cmd1, t_cmd *cmd2);
 
 #endif
