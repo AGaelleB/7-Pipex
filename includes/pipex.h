@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/11 17:04:11 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:50:39 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ typedef struct s_cmd
 
 typedef struct s_data
 {
-	char	**all_paths;
+	// char	**all_paths;
 	char	**all_argcs;
-	t_cmd	*cmd1;
-	t_cmd	*cmd2;
+	t_cmd	cmd1;
+	t_cmd	cmd2;
+	struct s_data	*next; /// 
 }	t_data;
 
 
@@ -61,12 +62,13 @@ typedef struct s_data
 /********************************* utils.c ************************************/
 
 int	ft_strncmp_pipex(char *s1, char *s2, int n);
+char	*ft_strjoin_pipex(char *s1, char *s2);
 
 /********************************* utils.c ************************************/
 
 char	**ft_get_paths(char **envp, t_data	*data);
-// char	**ft_get_argc(int ac, char **av, t_data	*data);
-// int	**ft_get_argcs(t_cmd **cmd1, t_cmd **cmd2, t_data *data); // stock les argc
-int	ft_get_argcs(char **argv, t_cmd *cmd1, t_cmd *cmd2);
+// void	ft_get_argcs(char **argv, t_data *data)
+// void	ft_get_argcs(t_data *data);
+
 
 #endif

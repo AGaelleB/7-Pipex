@@ -24,6 +24,9 @@ Le concept clé de Pipex est de réaliser le transfert de données entre deux fi
 **=> TEST :**
 valgrind --track-origins=yes --trace-children=yes --track-fds=yes --leak-check=full env -i ./pipex /dev/stdin "ls" "cat -e" /dev/stdout
 
+Tester les cas classiques (fd NULL, n existe pas, pas les autorisations minimum, cmd pareil) e
+Et les cas particuliers (surtout cat|cat|ls ou yes|head)
+
 
 ## **PIPE :**
 
