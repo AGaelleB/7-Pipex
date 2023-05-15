@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/12 15:06:24 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:04:06 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ size_t	ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize)
 	dst[i] = '/';
 	return (ft_strlen(src));
 }
-
 
 int	ft_strncmp_pipex(char *s1, char *s2, int n)
 {
