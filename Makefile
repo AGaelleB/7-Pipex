@@ -6,7 +6,7 @@
 #    By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 10:44:39 by abonnefo          #+#    #+#              #
-#    Updated: 2023/05/12 10:57:04 by abonnefo         ###   ########.fr        #
+#    Updated: 2023/05/15 15:07:59 by abonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall #-Wextra -Werror -g3
 
 SRCS = srcs/pipex.c \
 	srcs/utils.c \
-	# srcs/data.c \
+	srcs/data.c \
 
 SRC_LIBFT = libft/ft_atoi.c \
 	libft/ft_bzero.c \
