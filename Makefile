@@ -6,7 +6,7 @@
 #    By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 10:44:39 by abonnefo          #+#    #+#              #
-#    Updated: 2023/05/15 15:07:59 by abonnefo         ###   ########.fr        #
+#    Updated: 2023/05/16 11:18:36 by abonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,10 @@ NAME = pipex
 CC = gcc
 
 CFLAGS = -Wall #-Wextra -Werror -g3
+
+OBJ_DIR_PIPEX = srcs/obj_pipex
+
+OBJ_DIR_LIBFT = libft/obj_libft
 
 SRCS = srcs/pipex.c \
 	srcs/utils.c \
@@ -77,13 +81,18 @@ SRCS_PRINTF = libft/ft_printf/ft_printf.c \
 	libft/ft_printf/ft_print_u.c \
 	libft/ft_printf/ft_print_x.c \
 
-OBJS = $(SRCS:.c=.o) $(SRC_LIBFT:.c=.o) $(SRC_LIBFT_BONUS:.c=.o) $(SRCS_GNL:.c=.o) $(SRCS_PRINTF:.c=.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR_PIPEX)/%.o) \
+		$(SRC_LIBFT:%.c=$(OBJ_DIR_LIBFT)/%.o) \
+		$(SRC_LIBFT_BONUS:%.c=$(OBJ_DIR_LIBFT)/%.o) \
+		$(SRCS_GNL:%.c=$(OBJ_DIR_LIBFT)/%.o) \
+		$(SRCS_PRINTF:%.c=$(OBJ_DIR_LIBFT)/%.o) \
 
 AR = ar rcs
 
 RM = rm -f
 
-%.o: %.c
+$(OBJ_DIR_PIPEX)/%.o $(OBJ_DIR_LIBFT)/%.o: %.c
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
