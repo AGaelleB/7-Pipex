@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/17 14:47:38 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:57:35 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_cmd	split_cmd(t_data *data, char *cmd_av, char **envp)// mets les args en tabs
 	// else
 	// {
 		// printf("TESSSSSSSSSSSSSSSSSSSSSSSSSSST\n\n");
-		// // execve(command.path, command.args, envp);
+		// execve(command.path, command.args, envp);
 		// printf("YOOOOOOOOOOOOO\n\n");
 
 	// }
