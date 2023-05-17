@@ -20,6 +20,9 @@ Le concept clé de Pipex est de réaliser le transfert de données entre deux fi
     -> il faut ajouter la lib <signal.h> 
 - Check your fds currently open : ls -la /proc/$$/fd
 - Check whether the command exists and is executable : access()
+- La fonction dup2() permet de rediriger les entrées/sorties standard d'un descripteur de fichier vers un autre descripteur. Voici sa syntaxe :
+
+
 
 **=> TEST :**
 valgrind --track-origins=yes --trace-children=yes --track-fds=yes --leak-check=full env -i ./pipex /dev/stdin "ls" "cat -e" /dev/stdout
