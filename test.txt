@@ -1,8 +1,4 @@
-1
-2
-3
-4
-coucou
-5 lignes
-je veux faire un grep de ce texte
+bonjour
+je fais 
 17 mots
+il faut encore que je redirige le resultat dans le nvx doc

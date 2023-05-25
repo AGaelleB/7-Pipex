@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 14:53:23 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:53:54 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ typedef struct s_cmd
 
 typedef struct s_data
 {
-	// char	**all_paths;
 	char	**all_argcs;
 	t_cmd	cmd1;
 	t_cmd	cmd2;
-	struct s_data	*next; //
+	struct s_data	*next;
 }	t_data;
 
 /********************************* pipex.c ************************************/
@@ -71,6 +70,5 @@ char *ft_check_paths(t_data *data, char **envp, char *args);
 t_cmd	split_cmd(t_data *data, char *cmd_av, char **envp);
 char	**ft_get_paths(char **envp, t_data	*data);
 void	ft_get_argcs(t_data *data, char **av, char **envp);
-
 
 #endif
