@@ -6,27 +6,11 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/15 10:04:06 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:18:51 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-size_t	ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-
-	if (dstsize == 0)
-		return (ft_strlen(src));
-	i = 0;
-	while (src[i] && i < dstsize - 1)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '/';
-	return (ft_strlen(src));
-}
 
 int	ft_strncmp_pipex(char *s1, char *s2, int n)
 {
@@ -42,18 +26,28 @@ int	ft_strncmp_pipex(char *s1, char *s2, int n)
 
 char	*ft_strjoin_pipex(char *s1, char *s2)
 {
-	char	*str;
-	size_t	size_s1;
-	size_t	size_s2;
+	int		i;
+	int		j;
+	char	*dest;
 
-	if (s1 == 0 || s2 == 0)
+	i = ft_strlen(s1) + ft_strlen(s2);
+	dest = malloc(sizeof(char) * (i + 2));
+	if (!dest)
 		return (NULL);
-	size_s1 = ft_strlen(s1);
-	size_s2 = ft_strlen(s2);
-	str = malloc(sizeof(*str) * (size_s1 + size_s2 + 1));
-	if (str == 0)
-		return (NULL);
-	ft_strlcpy_pipex(str, s1, (size_s1 + 1));
-	ft_strlcat(str, s2, (size_s1 + size_s2 + 2)); // + 1 pour le dernier caract
-	return (str);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = '/';
+	i++;
+	while (s2[j])
+	{
+		dest[i + j] = s2[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }
