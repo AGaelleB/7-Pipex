@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 15:53:54 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:31:58 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
-
 # include "../includes/ft_printf.h"
 # include "../includes/get_next_line.h"
 # include "../includes/libft.h"
@@ -66,9 +65,9 @@ char	*ft_strjoin_pipex(char *s1, char *s2);
 
 /********************************* data.c ************************************/
 
-char *ft_check_paths(t_data *data, char **envp, char *args);
-t_cmd	split_cmd(t_data *data, char *cmd_av, char **envp);
-char	**ft_get_paths(char **envp, t_data	*data);
+char *ft_check_paths(char **envp, char *args);
+t_cmd	split_cmd(char *cmd_av, char **envp);
+char	**ft_get_paths(char **envp);
 void	ft_get_argcs(t_data *data, char **av, char **envp);
 
 #endif
