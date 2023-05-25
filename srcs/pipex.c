@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:40:53 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 13:06:42 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:30:31 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,89 +14,83 @@
 
 int child_process_one(int f2, char **cmd2, t_data *data, char **av, char **envp)
 {
-	printf("%schild_process_one%s\n", BLUE, RESET);
+	// printf("%schild_process_one%s\n", MAGENTA, RESET);
 
 	ft_get_argcs(data, av, envp);
 	ft_get_paths(envp, data);
 
-	printf("\ncmd1 = %s\n", *data->cmd1.args);
-	printf("PATH cmd1 = %s\n", data->cmd1.path);
+	// printf("\ncmd1 = %s\n", *data->cmd1.args);
+	// printf("PATH cmd1 = %s\n", data->cmd1.path);
 	
 	execve(data->cmd1.path, data->cmd1.args, envp);
-	
-	printf("%sEND child_process_one%s\n", BLUE, RESET);
-
 	return (0);
 }
 
 int child_process_two(int f1, char **cmd1, t_data *data, char **av, char **envp)
 {
-	printf("%schild_process_two\n%s", MAGENTA, RESET);
+	// printf("%schild_process_two\n%s", BLUE, RESET);
 
 	ft_get_argcs(data, av, envp);
 	ft_get_paths(envp, data);
 
-	printf("\ncmd2 = %s\n", *data->cmd2.args);
-	printf("PATH cmd2 = %s\n", data->cmd2.path);
+	// printf("\ncmd2 = %s\n", *data->cmd2.args);
+	// printf("PATH cmd2 = %s\n", data->cmd2.path);
 	
 	execve(data->cmd2.path, data->cmd2.args, envp);
-
-	printf("%sEND child_process_two%s\n", MAGENTA, RESET);
-
 	return (0);
 }
 
 void	pipex(int f1, int f2, t_data *data, char **av, char **envp)
 {
-	// int	end[2];
+	int	end[2];
 
 	pid_t	pid;
 	// pid_t	wait_pid;
-	// int		status;
+	int		status;
 
-	// pipe(end);
-
+	pipe(end);
 	pid = fork();
-	printf("\npid = %d\n", pid);
 	
-	if (pid < 0) //Erreur lors de la création du processus enfant
+	if (pid < 0)
 	{
-		// free
+		// free ?
 		return (perror("Fork: "));
 	}
-	if (pid == 0) // executera la 1er cmd
+	if (pid == 0)
 	{
-		printf("\n%sJe suis le processus one%s\n", MAGENTA, RESET);
+		// printf("\n%sJe suis le processus one%s\n", MAGENTA, RESET);
 		
-		// close(end[0]); // Ferme l'extrémité de lecture de la pipe
-		// dup2(end[1], STDOUT_FILENO); // Redirige la sortie standard vers l'extrémité d'écriture de la pipe
+		close(end[0]); // Ferme l'extrémité de lecture de la pipe
+		dup2(end[1], STDOUT_FILENO); // Redirige la sortie standard vers l'extrémité d'écriture de la pipe
+
 		child_process_one(f1, data->cmd1.args, data, av, envp);
-		printf("END de pipex enfant one\n");
-		// close(end[1]); // Ferme l'extrémité d'écriture de la pipe
+		// printf("%sEND de pipex enfant one%s\n", MAGENTA, RESET);
+
+		close(end[1]); // Ferme l'extrémité d'écriture de la pipe
 	}
 
 	pid = fork();
-	printf("\npid = %d\n", pid);
 	
-	if (pid < 0) //Erreur lors de la création du processus enfant
+	if (pid < 0)
 	{
-		// free
+		// free ?
 		return (perror("Fork: "));
 	}
-	if (pid == 0) // executera la 2e cmd
+	if (pid == 0)
 	{
-		printf("\n%sJe suis le processus two%s\n", BLUE, RESET);
+		// printf("\n%sJe suis le processus two%s\n", BLUE, RESET);
 		
 		// wait_pid = waitpid(pid, &status, 0); // Attend la terminaison du processus enfant
-		// waitpid(pid, &status, 0); // Attend la terminaison du processus enfant
-		// close(end[1]); // Ferme l'extrémité d'écriture de la pipe
-		// dup2(end[0], STDIN_FILENO); // Redirige l'entrée standard vers l'extrémité de lecture de la pipe
+
+		waitpid(pid, &status, 0); // Attend la terminaison du processus enfant
+		close(end[1]); // Ferme l'extrémité d'écriture de la pipe
+		dup2(end[0], STDIN_FILENO); // Redirige l'entrée standard vers l'extrémité de lecture de la pipe
 		
 		child_process_two(f2, data->cmd2.args, data, av, envp);
-		printf("END pipex enfant two\n");
-		// close(end[0]); // Ferme l'extrémité de lecture de la pipe
+		// printf("\n%sEND pipex enfant two%s\n", BLUE, RESET);
+
+		close(end[0]); // Ferme l'extrémité de lecture de la pipe
 	}
-	printf("END de pipex\n");
 }
 
 int main(int ac, char **av, char **envp)
@@ -114,7 +108,6 @@ int main(int ac, char **av, char **envp)
 		
 	pipex(f1, f2, &data, av, envp);
 	
-	printf("END je suis sortie youpie\n");
-
+	// printf("END je suis sortie youpie\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 13:02:17 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:31:00 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,30 @@ char	*ft_check_paths(t_data *data, char **envp, char *args)
 
 t_cmd	split_cmd(t_data *data, char *cmd_av, char **envp)// mets les args en tabs
 {
-	printf("\n *** split_cmd *** \n");
+	// printf("\n *** split_cmd *** \n");
 
 	t_cmd	command;
 
 	command.args = ft_split(cmd_av, ' ');
 	command.path = ft_check_paths(data, envp, *command.args);
-	if (execve(command.path, command.args, envp) == -1)
-	{
-		perror("Execve");
-		exit (0);
-	}
-	else
-	{
-		execve(command.path, command.args, envp);
-	}
+	// if (execve(command.path, command.args, envp) == -1)
+	// {
+	// 	perror("Execve");
+	// 	exit (0);
+	// }
+	// else
+	// {
+	// 	execve(command.path, command.args, envp);
+	// }
 	
-	printf("\n *** END split_cmd *** \n");
+	// printf("\n *** END split_cmd *** \n");
 
 	return (command);
 }
 
 char	**ft_get_paths(char **envp, t_data	*data)// stock les paths
 {
-	printf("\n *** ft_get_paths *** \n");
+	// printf("\n *** ft_get_paths *** \n");
 	char	*path;
 	char	**all_paths;
 
@@ -84,19 +84,19 @@ char	**ft_get_paths(char **envp, t_data	*data)// stock les paths
 		return (NULL);
 	all_paths = ft_split(path, ':');
 
-	printf("\n *** END ft_get_paths *** \n");
+	// printf("\n *** END ft_get_paths *** \n");
 
 	return (all_paths);
 }
 
 void	ft_get_argcs(t_data *data, char **av, char **envp) // recup les ARGS
 {
-	printf("\n *** ft_get_argcs *** \n");
+	// printf("\n *** ft_get_argcs *** \n");
 
 	data->cmd1 = split_cmd(data, av[2], envp);
 	data->cmd2 = split_cmd(data, av[3], envp);
 
-	printf("\n *** END ft_get_argcs *** \n");
+	// printf("\n *** END ft_get_argcs *** \n");
 
 }
 
