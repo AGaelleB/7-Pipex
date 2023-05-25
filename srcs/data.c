@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/17 15:57:35 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:02:17 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,15 @@ t_cmd	split_cmd(t_data *data, char *cmd_av, char **envp)// mets les args en tabs
 
 	command.args = ft_split(cmd_av, ' ');
 	command.path = ft_check_paths(data, envp, *command.args);
-	// if (execve(command.path, command.args, envp) == -1)
-	// {
-	// 	perror("Execve");
-	// 	exit (0);
-	// }
-	// else
-	// {
-		// printf("TESSSSSSSSSSSSSSSSSSSSSSSSSSST\n\n");
-		// execve(command.path, command.args, envp);
-		// printf("YOOOOOOOOOOOOO\n\n");
-
-	// }
+	if (execve(command.path, command.args, envp) == -1)
+	{
+		perror("Execve");
+		exit (0);
+	}
+	else
+	{
+		execve(command.path, command.args, envp);
+	}
 	
 	printf("\n *** END split_cmd *** \n");
 
@@ -102,3 +99,10 @@ void	ft_get_argcs(t_data *data, char **av, char **envp) // recup les ARGS
 	printf("\n *** END ft_get_argcs *** \n");
 
 }
+
+
+
+/*
+
+
+*/
