@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 10:29:44 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:53:23 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <fcntl.h>
 # include <stdint.h>
 # include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
 
 # include "../includes/ft_printf.h"
