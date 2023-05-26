@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/26 11:45:55 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:53:24 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_cmd	split_cmd(char *cmd_av, char **envp)
 
 void	ft_get_argcs(t_data *data, char **av, char **envp)
 {
-
 	data->cmd1 = split_cmd(av[2], envp);
 	if (data->cmd1.path == NULL)
 	{

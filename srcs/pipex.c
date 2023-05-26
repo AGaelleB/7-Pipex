@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:40:53 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/26 11:23:53 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:58:28 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 int	child_process_one(t_data *data, char **av, char **envp)
 {
 	ft_get_argcs(data, av, envp);
-	ft_get_paths(envp);
 	if (execve(data->cmd1.path, data->cmd1.args, envp) == -1)
 	{
-		// ft_free_tab(data->cmd2.args);
-		// free(data->cmd2.path);
 		perror("Execve");
 		exit (0);
 	}
@@ -31,11 +28,8 @@ int	child_process_one(t_data *data, char **av, char **envp)
 int	child_process_two(t_data *data, char **av, char **envp)
 {
 	ft_get_argcs(data, av, envp);
-	ft_get_paths(envp);
 	if (execve(data->cmd2.path, data->cmd2.args, envp) == -1)
 	{
-		// ft_free_tab(data->cmd2.args);
-		// free(data->cmd2.path);
 		perror("Execve");
 		exit (0);
 	}
@@ -53,11 +47,7 @@ void	pipex(int f2, t_data *data, char **av, char **envp)
 	pipe(fd);
 	pid = fork();
 	if (pid < 0)
-	{
-		// ft_free_tab(data->cmd2.args);
-		// free(data->cmd2.path);
 		return (perror("Fork: "));
-	}
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -67,12 +57,8 @@ void	pipex(int f2, t_data *data, char **av, char **envp)
 	}
 	pid = fork();
 	if (pid < 0)
-	{
-		// ft_free_tab(data->cmd2.args);
-		// free(data->cmd2.path);
 		return (perror("Fork: "));
-	}
-	if (pid == 0)
+	if (pid == 0) // faire une protection pour rediriger QUE si tout est ok
 	{
 		waitpid(pid, &status, 0);
 		close(fd[1]);
@@ -96,7 +82,10 @@ int	main(int ac, char **av, char **envp)
 		f1 = open(av[1], O_RDONLY);
 		f2 = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (f1 < 0 || f2 < 0)
-			return (-1);
+		{
+			perror("Open");
+			exit (0);
+		}
 		pipex(f2, &data, av, envp);
 		close(f1);
 	}
@@ -104,3 +93,12 @@ int	main(int ac, char **av, char **envp)
 		ft_printf("Error : Bad numbers of arguments");
 	return (0);
 }
+
+
+/*
+
+./pipex /dev/stdin cat ls /dev/stdout, et je compare a < /dev/stdin cat | ls /dev/stdout, le pipe classique attend, mon pipex rend la commande de terminal
+
+env -i ./pipex test.txt "cat test.txt" "grep b" result.txt // pour enlever l env
+
+*/

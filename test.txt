@@ -1,4 +1,5 @@
 bonjour
 je fais 
-17 mots
+19 mots
 il faut encore que je redirige le resultat dans le nvx doc
+c'est FAUX
