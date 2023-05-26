@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 17:19:41 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:53:29 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 
 int		ft_strncmp_pipex(char *s1, char *s2, int n);
 char	*ft_strjoin_pipex(char *s1, char *s2);
+void	ft_free_tab(char **tab);
 
 /********************************* data.c ************************************/
 

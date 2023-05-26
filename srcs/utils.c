@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/25 17:18:51 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:36:44 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,14 @@ char	*ft_strjoin_pipex(char *s1, char *s2)
 	}
 	dest[i + j] = '\0';
 	return (dest);
+}
+
+void	ft_free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
