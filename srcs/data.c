@@ -54,13 +54,17 @@ char	*ft_check_paths(char **envp, char *args)
 		i++;
 	}
 	ft_free_tab(temp_path);
+
 	if (valid_path != NULL)
 	{
 		if (access(valid_path, F_OK | X_OK) == 0)
 			return (valid_path);
 	}
 	else
+	{
 		perror("Error : invalid path");
+		exit (0);
+	}
 	return (valid_path);
 }
 

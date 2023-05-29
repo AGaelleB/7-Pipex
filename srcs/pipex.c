@@ -14,10 +14,10 @@
 
 int	child_process_one(t_data *data, char **av, char **envp)
 {
-	ft_get_argcs(data, av, envp);
+	//ft_get_argcs(data, av, envp);
 	if (execve(data->cmd1.path, data->cmd1.args, envp) == -1)
 	{
-		perror("Execve");
+		perror("Execve child one");
 		exit (0);
 	}
 	else
@@ -27,10 +27,10 @@ int	child_process_one(t_data *data, char **av, char **envp)
 
 int	child_process_two(t_data *data, char **av, char **envp)
 {
-	ft_get_argcs(data, av, envp);
+	//ft_get_argcs(data, av, envp);
 	if (execve(data->cmd2.path, data->cmd2.args, envp) == -1)
 	{
-		perror("Execve");
+		perror("Execve child two");
 		exit (0);
 	}
 	else
@@ -43,6 +43,8 @@ void	pipex(int f2, t_data *data, char **av, char **envp)
 	int		fd[2];
 	int		status;
 	pid_t	pid;
+
+	ft_get_argcs(data, av, envp); // ADD ICI
 
 	pipe(fd);
 	pid = fork();
