@@ -6,13 +6,12 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/26 13:53:24 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:39:29 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-/*stock les paths*/
 char	**ft_get_paths(char **envp)
 {
 	char	*path;
@@ -54,17 +53,13 @@ char	*ft_check_paths(char **envp, char *args)
 		i++;
 	}
 	ft_free_tab(temp_path);
-
 	if (valid_path != NULL)
 	{
 		if (access(valid_path, F_OK | X_OK) == 0)
 			return (valid_path);
 	}
 	else
-	{
 		perror("Error : invalid path");
-		exit (0);
-	}
 	return (valid_path);
 }
 
@@ -83,7 +78,7 @@ void	ft_get_argcs(t_data *data, char **av, char **envp)
 	if (data->cmd1.path == NULL)
 	{
 		ft_free_tab(data->cmd1.args);
-		exit(0);
+		exit (-1);
 	}
 	data->cmd2 = split_cmd(av[3], envp);
 	if (data->cmd2.path == NULL)
@@ -91,6 +86,6 @@ void	ft_get_argcs(t_data *data, char **av, char **envp)
 		ft_free_tab(data->cmd1.args);
 		ft_free_tab(data->cmd2.args);
 		free(data->cmd1.path);
-		exit(0);
+		exit (-1);
 	}
 }

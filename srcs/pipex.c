@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:40:53 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/26 14:58:28 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:33:38 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,21 @@
 
 int	child_process_one(t_data *data, char **av, char **envp)
 {
-	//ft_get_argcs(data, av, envp);
 	if (execve(data->cmd1.path, data->cmd1.args, envp) == -1)
 	{
 		perror("Execve child one");
-		exit (0);
+		exit (-1);
 	}
-	else
-		execve(data->cmd1.path, data->cmd1.args, envp);
 	return (0);
 }
 
 int	child_process_two(t_data *data, char **av, char **envp)
 {
-	//ft_get_argcs(data, av, envp);
 	if (execve(data->cmd2.path, data->cmd2.args, envp) == -1)
 	{
 		perror("Execve child two");
-		exit (0);
+		exit (-1);
 	}
-	else
-		execve(data->cmd2.path, data->cmd2.args, envp);
 	return (0);
 }
 
@@ -44,8 +38,7 @@ void	pipex(int f2, t_data *data, char **av, char **envp)
 	int		status;
 	pid_t	pid;
 
-	ft_get_argcs(data, av, envp); // ADD ICI
-
+	ft_get_argcs(data, av, envp);
 	pipe(fd);
 	pid = fork();
 	if (pid < 0)
@@ -70,6 +63,7 @@ void	pipex(int f2, t_data *data, char **av, char **envp)
 		close(fd[0]);
 		close(f2);
 	}
+	ft_free_all_data(data);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -86,7 +80,7 @@ int	main(int ac, char **av, char **envp)
 		if (f1 < 0 || f2 < 0)
 		{
 			perror("Open");
-			exit (0);
+			exit (-1);
 		}
 		pipex(f2, &data, av, envp);
 		close(f1);

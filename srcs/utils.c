@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/26 10:36:44 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 09:51:22 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,12 @@ void	ft_free_tab(char **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
+}
+
+void	ft_free_all_data(t_data *data)
+{
+	free(data->cmd1.path);
+	ft_free_tab(data->cmd1.args);
+	free(data->cmd2.path);
+	ft_free_tab(data->cmd2.args);
 }
