@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/30 09:51:22 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:11:46 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,13 @@ void	ft_free_all_data(t_data *data)
 	ft_free_tab(data->cmd1.args);
 	free(data->cmd2.path);
 	ft_free_tab(data->cmd2.args);
+}
+
+void	ft_print_error(char *str)
+{
+	int len;
+
+	len = ft_strlen(str);
+	write(2, str, len);
+	write(2, " : invalid command\n", 19);
 }

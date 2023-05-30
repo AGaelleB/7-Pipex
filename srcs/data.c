@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/30 10:39:29 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:23:46 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*ft_check_paths(char **envp, char *args)
 	temp_path = ft_get_paths(envp);
 	valid_path = NULL;
 	i = 0;
-
 	while (temp_path[i] && !valid_path)
 	{
 		valid_path = ft_strjoin_pipex(temp_path[i], args);
@@ -58,8 +57,12 @@ char	*ft_check_paths(char **envp, char *args)
 		if (access(valid_path, F_OK | X_OK) == 0)
 			return (valid_path);
 	}
-	else
-		perror("Error : invalid path");
+	else // if (valid_path == NULL)
+	{
+		ft_print_error(args);
+		// free
+		// exit 
+	}
 	return (valid_path);
 }
 
@@ -75,17 +78,17 @@ t_cmd	split_cmd(char *cmd_av, char **envp)
 void	ft_get_argcs(t_data *data, char **av, char **envp)
 {
 	data->cmd1 = split_cmd(av[2], envp);
-	if (data->cmd1.path == NULL)
-	{
-		ft_free_tab(data->cmd1.args);
-		exit (-1);
-	}
+	// if (data->cmd1.path == NULL)
+	// {
+	// 	ft_free_tab(data->cmd1.args);
+	// 	// exit (-1);
+	// }
 	data->cmd2 = split_cmd(av[3], envp);
-	if (data->cmd2.path == NULL)
-	{
-		ft_free_tab(data->cmd1.args);
-		ft_free_tab(data->cmd2.args);
-		free(data->cmd1.path);
-		exit (-1);
-	}
+	// if (data->cmd2.path == NULL)
+	// {
+		// ft_free_tab(data->cmd1.args);
+		// ft_free_tab(data->cmd2.args);
+		// free(data->cmd1.path);
+		// exit (-1);
+	// }
 }

@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/30 09:51:37 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:24:41 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define CYAN "\033[36m"
 # define WHITE "\033[37m"
 
+# define ERROR_PATH "Error : invalid path"
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -36,6 +38,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+#include <errno.h>
 
 # include "../includes/ft_printf.h"
 # include "../includes/get_next_line.h"
@@ -63,6 +66,7 @@ int		ft_strncmp_pipex(char *s1, char *s2, int n);
 char	*ft_strjoin_pipex(char *s1, char *s2);
 void	ft_free_tab(char **tab);
 void	ft_free_all_data(t_data *data);
+void	ft_print_error(char *str);
 
 /********************************* data.c ************************************/
 
