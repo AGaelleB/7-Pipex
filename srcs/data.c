@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/30 14:23:46 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:32:36 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_check_paths(char **envp, char *args)
 		if (access(valid_path, F_OK | X_OK) == 0)
 			return (valid_path);
 	}
-	else // if (valid_path == NULL)
+	else
 	{
 		ft_print_error(args);
 		// free

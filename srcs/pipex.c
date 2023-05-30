@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:40:53 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/30 14:30:53 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:29:02 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	child_process_one(t_data *data, char **av, char **envp)
 {
 	if ((data->cmd1.path != NULL) && (execve(data->cmd1.path, data->cmd1.args, envp) == -1))
 	{
+		// ft_free_all_data(data); // ADD
 		perror("Error"); // ICI
 		exit (-1);
 	}
@@ -25,6 +26,7 @@ void	child_process_two(t_data *data, char **av, char **envp)
 {
 	if ((data->cmd2.path != NULL) && (execve(data->cmd2.path, data->cmd2.args, envp) == -1))
 	{
+		// ft_free_all_data(data); // ADD
 		perror("Error"); // ICI
 		exit (-1);
 	}
@@ -42,12 +44,16 @@ void	pipex(t_data *data, char **av, char **envp)
 	pipe(fd);
 	pid = fork();
 	if (pid < 0)
+	{
+		// ft_free_all_data(data); // ADD ???
 		perror("Error"); // ICI
+	}
 	if (pid == 0)
 	{
 		f1 = open(av[1], O_RDONLY);
 		if (f1 < 0)
 		{
+			ft_free_all_data(data); // ADD
 			perror(av[1]);
 			exit (-1);
 		}
@@ -59,13 +65,17 @@ void	pipex(t_data *data, char **av, char **envp)
 	}
 	pid = fork();
 	if (pid < 0)
+	{
+		// ft_free_all_data(data); // ADD ???
 		perror("Error"); // ICI
+	}
 	if (pid == 0)
 	{
 		waitpid(pid, &status, 0);
 		f2 = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (f2 < 0)
 		{
+			ft_free_all_data(data); // ADD
 			perror(av[4]);
 			exit (-1);
 		}
@@ -107,4 +117,5 @@ tester avec :
 un nom de dossier
 un chemin absolu
 sans environement env -i (ou  -u)
+tester les leaks en fonction des permission chmod 777 / chmod 0
 */
