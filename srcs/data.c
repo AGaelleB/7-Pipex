@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/01 09:49:29 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:30:28 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,34 @@ char	**ft_get_paths(char **envp)
 	return (all_paths);
 }
 
+int	ft_strchr_slash(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*ft_check_paths(char **envp, char *args)
 {
 	char	**temp_path;
 	char	*valid_path;
 	int		i;
 
+	if (ft_strchr_slash(args, '/') == 1) // exec les chemins absolu ou ./a.out
+	{
+		if (access(args, F_OK | X_OK) == 0)
+			return (args);
+		else
+			return (NULL);
+	}
+	
 	temp_path = ft_get_paths(envp);
 	valid_path = NULL;
 	i = 0;
@@ -58,37 +80,14 @@ char	*ft_check_paths(char **envp, char *args)
 			return (valid_path);
 	}
 	else
-	{
 		ft_print_error(args);
-		// free
-		// exit 
-	}
 	return (valid_path);
-}
-
-t_cmd	split_cmd(char *cmd_av, char **envp)
-{
-	t_cmd	command;
-
-	command.args = ft_split(cmd_av, ' ');
-	command.path = ft_check_paths(envp, *command.args);
-	return (command);
 }
 
 void	ft_get_argcs(t_data *data, char **av, char **envp)
 {
-	data->cmd1 = split_cmd(av[2], envp);
-	// if (data->cmd1.path == NULL)
-	// {
-		// ft_free_tab(data->cmd1.args);
-		// exit (-1);
-	// }
-	data->cmd2 = split_cmd(av[3], envp);
-	// if (data->cmd2.path == NULL)
-	// {
-	// 	ft_free_tab(data->cmd1.args);
-	// 	ft_free_tab(data->cmd2.args);
-	// 	free(data->cmd1.path);
-	// 	exit (-1);
-	// }
+	data->cmd1.args = ft_split(av[2], ' ');
+	data->cmd2.args = ft_split(av[3], ' ');
+	data->cmd1.path = ft_check_paths(envp, *data->cmd1.args);
+	data->cmd2.path = ft_check_paths(envp, *data->cmd2.args);
 }
