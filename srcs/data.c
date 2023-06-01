@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/05/30 14:32:36 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/01 09:49:29 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ void	ft_get_argcs(t_data *data, char **av, char **envp)
 	data->cmd1 = split_cmd(av[2], envp);
 	// if (data->cmd1.path == NULL)
 	// {
-	// 	ft_free_tab(data->cmd1.args);
-	// 	// exit (-1);
+		// ft_free_tab(data->cmd1.args);
+		// exit (-1);
 	// }
 	data->cmd2 = split_cmd(av[3], envp);
 	// if (data->cmd2.path == NULL)
 	// {
-		// ft_free_tab(data->cmd1.args);
-		// ft_free_tab(data->cmd2.args);
-		// free(data->cmd1.path);
-		// exit (-1);
+	// 	ft_free_tab(data->cmd1.args);
+	// 	ft_free_tab(data->cmd2.args);
+	// 	free(data->cmd1.path);
+	// 	exit (-1);
 	// }
 }
