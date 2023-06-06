@@ -25,15 +25,15 @@ Le concept clé de Pipex est de réaliser le transfert de données entre deux fi
 
 
 **=> TEST :**
-valgrind --track-origins=yes --trace-children=yes --track-fds=yes --leak-check=full env -i ./pipex /dev/stdin "ls" "cat -e" /dev/stdout
-./pipex /dev/stdin cat ls /dev/stdout, et je compare a < /dev/stdin cat | ls /dev/stdout
-env -i ./pipex test.txt "cat test.txt" "grep b" result.txt // pour enlever l env
-valgrind --trace-children=yes ./pipex infile ls ls outfile //tester les leacks des childs
-valgrind --track-fds=yes ./pipex infile ls ls outfile // verifer les close/open des fd
-./pipex infile lls ls outfile // la premiere doit foiree ma la deuxieme doit correctement etre executee vis versa
-./pipex infile ./a.out cat test   // faire une condition(if av[1] == "./") si il y a un "./" directement envoyer dans le execve
-valgrind ./pipex infile ls ls outfile  // a tester avec les droits de infile et de outfile a 0 atention il doit retourner "infile ou outfile : permission denied"
-valgrind ./pipex infile "cat infile"  "/usr/bin/wc" outfile 
+- valgrind --track-origins=yes --trace-children=yes --track-fds=yes --leak-check=full env -i ./pipex /dev/stdin "ls" "cat -e" /dev/stdout
+- ./pipex /dev/stdin cat ls /dev/stdout, et je compare a < /dev/stdin cat | ls /dev/stdout
+- env -i ./pipex test.txt "cat test.txt" "grep b" result.txt // pour enlever l env
+- valgrind --trace-children=yes ./pipex infile ls ls outfile //tester les leacks des childs
+- valgrind --track-fds=yes ./pipex infile ls ls outfile // verifer les close/open des fd
+- ./pipex infile lls ls outfile // la premiere doit foiree ma la deuxieme doit correctement etre executee vis versa
+- ./pipex infile ./a.out cat test   // faire une condition(if av[1] == "./") si il y a un "./" directement envoyer dans le execve
+- valgrind ./pipex infile ls ls outfile  // a tester avec les droits de infile et de outfile a 0 atention il doit retourner "infile ou outfile : permission denied"
+- valgrind ./pipex infile "cat infile"  "/usr/bin/wc" outfile 
 
 Autres tests : 
 - cas classiques (fd NULL, n existe pas, pas les autorisations minimum, cmd pareil)
