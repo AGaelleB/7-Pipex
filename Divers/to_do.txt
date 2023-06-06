@@ -1,6 +1,25 @@
-TO DO
+Plusieurs tests : 
+./pipex /dev/stdin cat ls /dev/stdout, et je compare a < /dev/stdin cat | ls /dev/stdout, le pipe classique attend, mon pipex rend la commande de terminal
+env -i ./pipex test.txt "cat test.txt" "grep b" result.txt // pour enlever l env
+valgrind --trace-children=yes ./pipex infile ls ls outfile //tester les leacks des childs
+valgrind --track-fds=yes ./pipex infile ls ls outfile // verifer les close/open des fd
+./pipex infile lls ls outfile // la premiere doit foiree ma la deuxieme doit correctement etre executee vis versa
+./pipex infile ./a.out cat test   // faire une condition(if av[1] == "./") si il y a un "./" directement envoyer dans le execve
+valgrind ./pipex infile ls ls outfile  // a tester avec les droits de infile et de outfile a 0 atention il doit retourner "infile ou outfile : permission denied"
 
-- en premier voir comment fonctionnent les processus, c'est quoi les variables d'environnement, un pipe
-- essayez de faire fonctionner execve 
-- après comment ça fonctionne de créer des processus fils avec un fork
-- ensuite comment fonctionne le pipe (la redirection de l'entrée/sortie avec le pipe)
+
+tester avec :
+un nom de dossier (est ce que autre chose que cat pour ouvrir un dossier en msg d ereur ?)
+un chemin absolu / sans environement env -i (ou  -u)
+un executable
+tester les leaks en fonction des permission chmod 777 / chmod 0
+
+
+ERREUR A CORRIGER : 
+
+valgrind ./pipex infile "cat infile"  "/usr/bin/wc" outfile 
+	prb de leak, trop de free, on free les cases du tab du chemin abso alors qu il n existe pas, il faurait dans ce cas uniquement faire un free() (et non le all tab)
+
+./pipex outfile "cat outfile" "grep i" outfile 
+	Erreur: si le fichier d'entree est le meme que celui vers lequel on redirige (d'apres bash on est sensé tout ecrase sans trier) nous trions une premiere fois puis nous ecrasons
+SOLUTION: potentielle: suprimer le file(av[1]) avec rm et le recreer avec touch(av[1]) 

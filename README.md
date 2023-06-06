@@ -26,9 +26,28 @@ Le concept clé de Pipex est de réaliser le transfert de données entre deux fi
 
 **=> TEST :**
 valgrind --track-origins=yes --trace-children=yes --track-fds=yes --leak-check=full env -i ./pipex /dev/stdin "ls" "cat -e" /dev/stdout
+./pipex /dev/stdin cat ls /dev/stdout, et je compare a < /dev/stdin cat | ls /dev/stdout
+env -i ./pipex test.txt "cat test.txt" "grep b" result.txt // pour enlever l env
+valgrind --trace-children=yes ./pipex infile ls ls outfile //tester les leacks des childs
+valgrind --track-fds=yes ./pipex infile ls ls outfile // verifer les close/open des fd
+./pipex infile lls ls outfile // la premiere doit foiree ma la deuxieme doit correctement etre executee vis versa
+./pipex infile ./a.out cat test   // faire une condition(if av[1] == "./") si il y a un "./" directement envoyer dans le execve
+valgrind ./pipex infile ls ls outfile  // a tester avec les droits de infile et de outfile a 0 atention il doit retourner "infile ou outfile : permission denied"
+valgrind ./pipex infile "cat infile"  "/usr/bin/wc" outfile 
 
-Tester les cas classiques (fd NULL, n existe pas, pas les autorisations minimum, cmd pareil) e
-Et les cas particuliers (surtout cat|cat|ls ou yes|head)
+Autres tests : 
+- cas classiques (fd NULL, n existe pas, pas les autorisations minimum, cmd pareil)
+- cas particuliers (surtout cat|cat|ls ou yes|head)
+- un nom de dossier (est ce que autre chose que cat pour ouvrir un dossier en msg d ereur ?)
+- un chemin absolu / sans environement env -i (ou  -u)
+- un executable
+- les leaks en fonction des permission chmod 777 / chmod 0
+
+ERREUR DETECTÉE:
+./pipex outfile "cat outfile" "grep i" outfile 
+	Erreur: si le fichier d'entree est le meme que celui vers lequel on redirige (d'apres bash on est sensé tout ecrase sans trier) nous trions une premiere fois puis nous ecrasons
+SOLUTION: potentielle: suprimer le file(av[1]) avec rm et le recreer avec touch(av[1]) 
+
 
 
 ## **PIPE :**

@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/01 13:45:44 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:38:19 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ void	ft_free_all_data(t_data *data)
 	free(data->cmd1.path);
 	free(data->cmd2.path);
 	ft_free_tab(data->cmd1.args);
-	// if (data->cmd2.args[2])
-		ft_free_tab(data->cmd2.args);
-	// else
-		// free(data->cmd2.args);
+	ft_free_tab(data->cmd2.args);
 }
 
 void	ft_print_error(char *str)

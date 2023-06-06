@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/01 13:30:28 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:38:02 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_get_paths(char **envp)
 	{
 		if (ft_strncmp_pipex("PATH=", *envp, 5) == 0)
 		{
-			path = &((*envp)[5]); // a revoir
+			path = &((*envp)[5]);
 			break ;
 		}
 		envp++;
@@ -55,11 +55,14 @@ char	*ft_check_paths(char **envp, char *args)
 	if (ft_strchr_slash(args, '/') == 1) // exec les chemins absolu ou ./a.out
 	{
 		if (access(args, F_OK | X_OK) == 0)
-			return (args);
+		{
+			valid_path = ft_strdup(args); // Allouer une nouvelle mémoire et copier le chemin
+			return (valid_path);
+		}
 		else
 			return (NULL);
 	}
-	
+
 	temp_path = ft_get_paths(envp);
 	valid_path = NULL;
 	i = 0;

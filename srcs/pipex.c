@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:40:53 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/01 14:18:34 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:41:34 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	child_process_two(t_data *data, char **av, char **envp, int fd[2])
 		exit (-1);
 	}
 	close(f2);
-	}
+}
 
 void	pipex(t_data *data, char **av, char **envp)
 {
@@ -108,32 +108,3 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	return (0);
 }
-
-
-/*
-Plusieurs tests : 
-./pipex /dev/stdin cat ls /dev/stdout, et je compare a < /dev/stdin cat | ls /dev/stdout, le pipe classique attend, mon pipex rend la commande de terminal
-env -i ./pipex test.txt "cat test.txt" "grep b" result.txt // pour enlever l env
-valgrind --trace-children=yes ./pipex infile ls ls outfile //tester les leacks des childs
-valgrind --track-fds=yes ./pipex infile ls ls outfile // verifer les close/open des fd
-./pipex infile lls ls outfile // la premiere doit foiree ma la deuxieme doit correctement etre executee vis versa
-./pipex infile ./a.out cat test   // faire une condition(if av[1] == "./") si il y a un "./" directement envoyer dans le execve
-valgrind ./pipex infile ls ls outfile  // a tester avec les droits de infile et de outfile a 0 atention il doit retourner "infile ou outfile : permission denied"
-
-
-tester avec :
-un nom de dossier (est ce que autre chose que cat pour ouvrir un dossier en msg d ereur ?)
-un chemin absolu / sans environement env -i (ou  -u)
-un executable
-tester les leaks en fonction des permission chmod 777 / chmod 0
-
-
-ERREUR A CORRIGER : 
-
-valgrind ./pipex infile "cat infile"  "/usr/bin/wc" outfile 
-	prb de leak, trop de free, on free les cases du tab du chemin abso alors qu il n existe pas, il faurait dans ce cas uniquement faire un free() (et non le all tab)
-
-./pipex outfile "cat outfile" "grep i" outfile 
-	Erreur: si le fichier d'entree est le meme que celui vers lequel on redirige (d'apres bash on est sensé tout ecrase sans trier) nous trions une premiere fois puis nous ecrasons
-SOLUTION: potentielle: suprimer le file(av[1]) avec rm et le recreer avec touch(av[1]) 
-*/
