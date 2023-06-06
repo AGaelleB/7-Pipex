@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/06 16:38:19 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:52:05 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_free_all_data(t_data *data)
 
 void	ft_print_error(char *str)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	write(2, str, len);

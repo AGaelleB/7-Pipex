@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/06 16:38:02 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:04:50 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,23 @@ int	ft_strchr_slash(char *str, char c)
 	return (0);
 }
 
-char	*ft_check_paths(char **envp, char *args)
+char	*ft_check_absolute_path(char *args)
+{
+	if (ft_strchr_slash(args, '/') == 1)
+	{
+		if (access(args, F_OK | X_OK) == 0)
+			return (ft_strdup(args));
+		else
+			return (NULL);
+	}
+	return (NULL);
+}
+
+char	*ft_check_relative_paths(char **envp, char *args)
 {
 	char	**temp_path;
 	char	*valid_path;
 	int		i;
-
-	if (ft_strchr_slash(args, '/') == 1) // exec les chemins absolu ou ./a.out
-	{
-		if (access(args, F_OK | X_OK) == 0)
-		{
-			valid_path = ft_strdup(args); // Allouer une nouvelle mémoire et copier le chemin
-			return (valid_path);
-		}
-		else
-			return (NULL);
-	}
 
 	temp_path = ft_get_paths(envp);
 	valid_path = NULL;
@@ -82,15 +83,17 @@ char	*ft_check_paths(char **envp, char *args)
 		if (access(valid_path, F_OK | X_OK) == 0)
 			return (valid_path);
 	}
-	else
-		ft_print_error(args);
-	return (valid_path);
+	ft_print_error(args);
+	return (NULL);
 }
 
-void	ft_get_argcs(t_data *data, char **av, char **envp)
+char	*ft_check_paths(char **envp, char *args)
 {
-	data->cmd1.args = ft_split(av[2], ' ');
-	data->cmd2.args = ft_split(av[3], ' ');
-	data->cmd1.path = ft_check_paths(envp, *data->cmd1.args);
-	data->cmd2.path = ft_check_paths(envp, *data->cmd2.args);
+	char	*valid_path;
+
+	valid_path = ft_check_absolute_path(args);
+	if (valid_path != NULL)
+		return (valid_path);
+	valid_path = ft_check_relative_paths(envp, args);
+	return (valid_path);
 }
