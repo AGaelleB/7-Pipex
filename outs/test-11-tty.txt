@@ -1,0 +1,6 @@
+==174422== Memcheck, a memory error detector
+==174422== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==174422== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==174422== Command: ../pipex/pipex assets/deepthought.txt cat not-executable outs/test-11.txt
+==174422== 
+==174422== FATAL: can't open suppressions file "assets/supp.supp"
