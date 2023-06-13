@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:29:20 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/06 16:52:05 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:32:30 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_print_error(char *str)
 	int	len;
 
 	len = ft_strlen(str);
+	write(2, "command not found :", 19);
 	write(2, str, len);
-	write(2, " : invalid command\n", 19);
+	write(2, "\n", 1);
 }

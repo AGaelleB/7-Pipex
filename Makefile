@@ -6,7 +6,7 @@
 #    By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 10:44:39 by abonnefo          #+#    #+#              #
-#    Updated: 2023/05/25 16:26:30 by abonnefo         ###   ########.fr        #
+#    Updated: 2023/06/13 14:58:16 by abonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 
 CC = gcc
 
-CFLAGS = -Wall #-Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3
 
 OBJ_DIR_PIPEX = srcs/obj_pipex
 
