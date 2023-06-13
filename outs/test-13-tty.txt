@@ -1,6 +1,0 @@
-==174438== Memcheck, a memory error detector
-==174438== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==174438== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==174438== Command: ../pipex/pipex /dev/null env_var cat outs/test-13.txt
-==174438== 
-==174438== FATAL: can't open suppressions file "assets/supp.supp"

@@ -1,3 +1,0 @@
-make: Entering directory '/mnt/nfs/homes/abonnefo/Documents/Stud-42/pipex'
-make: 'pipex' is up to date.
-make: Leaving directory '/mnt/nfs/homes/abonnefo/Documents/Stud-42/pipex'
