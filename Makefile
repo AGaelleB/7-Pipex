@@ -6,7 +6,7 @@
 #    By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 10:44:39 by abonnefo          #+#    #+#              #
-#    Updated: 2023/06/13 14:58:16 by abonnefo         ###   ########.fr        #
+#    Updated: 2023/06/14 14:54:39 by abonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ OBJ_DIR_LIBFT = libft/obj_libft
 
 SRCS = srcs/pipex.c \
 	srcs/utils.c \
-	srcs/data.c \
+	srcs/libft_modify.c \
+	srcs/path.c \
 
 SRC_LIBFT = libft/ft_atoi.c \
 	libft/ft_bzero.c \

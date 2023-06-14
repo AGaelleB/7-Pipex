@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:59:39 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/13 14:57:09 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:54:43 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,19 @@ typedef struct s_data
 
 void	ft_get_argcs(t_data *data, char **av, char **envp);
 
-/********************************* utils.c ************************************/
+/***************************** libft_modify.c *********************************/
 
+int		ft_strchr_slash(char *str, char c);
 int		ft_strncmp_pipex(char *s1, char *s2, int n);
 char	*ft_strjoin_pipex(char *s1, char *s2);
+
+/********************************* utils.c ************************************/
+
 void	ft_free_tab(char **tab);
 void	ft_free_all_data(t_data *data);
 void	ft_print_error(char *str);
 
-/********************************** data.c ************************************/
+/********************************** path.c ************************************/
 
 char	*ft_check_paths(char **envp, char *args);
 t_cmd	split_cmd(char *cmd_av, char **envp);

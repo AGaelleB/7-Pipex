@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:37:03 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/06 17:04:50 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:55:45 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ char	**ft_get_paths(char **envp)
 	return (all_paths);
 }
 
-int	ft_strchr_slash(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*ft_check_absolute_path(char *args)
 {
 	if (ft_strchr_slash(args, '/') == 1)
@@ -58,13 +44,11 @@ char	*ft_check_absolute_path(char *args)
 	return (NULL);
 }
 
-char	*ft_check_relative_paths(char **envp, char *args)
+char	*find_valid_path(char **temp_path, char *args)
 {
-	char	**temp_path;
 	char	*valid_path;
 	int		i;
 
-	temp_path = ft_get_paths(envp);
 	valid_path = NULL;
 	i = 0;
 	while (temp_path[i] && !valid_path)
@@ -77,6 +61,23 @@ char	*ft_check_relative_paths(char **envp, char *args)
 		}
 		i++;
 	}
+	return (valid_path);
+}
+
+char	*ft_check_relative_paths(char **envp, char *args)
+{
+	char	**temp_path;
+	char	*valid_path;
+
+	temp_path = ft_get_paths(envp);
+	if (ft_isascii(temp_path[0][0]) == 0)
+	{
+		write(2, "No such file or directory: ", 28);
+		write(2, args, ft_strlen(args));
+		write(2, "\n", 1);
+		return (NULL);
+	}
+	valid_path = find_valid_path(temp_path, args);
 	ft_free_tab(temp_path);
 	if (valid_path != NULL)
 	{

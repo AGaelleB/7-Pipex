@@ -6,7 +6,7 @@
 /*   By: abonnefo <abonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:40:53 by abonnefo          #+#    #+#             */
-/*   Updated: 2023/06/13 14:49:49 by abonnefo         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:35:18 by abonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,22 @@ void	child_process_one(t_data *data, char **av, char **envp, int fd[2])
 		perror(av[1]);
 		exit (-1);
 	}
+	dup2(fd[1], 1);
 	close(fd[0]);
+	close(fd[1]);
 	dup2(f1, 0);
-	dup2(fd[1], STDOUT_FILENO);
+	close(f1);
 	if ((data->cmd1.path != NULL)
 		&& (execve(data->cmd1.path, data->cmd1.args, envp) == -1))
 	{
 		perror("Error");
+		close(fd[0]);
+		close(fd[1]);
+		close(0);
+		close(1);
+		ft_free_all_data(data);
 		exit (-1);
 	}
-	close(f1);
-	close(fd[1]);
 }
 
 void	child_process_two(t_data *data, char **av, char **envp, int fd[2])
@@ -55,18 +60,22 @@ void	child_process_two(t_data *data, char **av, char **envp, int fd[2])
 		perror(av[4]);
 		exit (-1);
 	}
+	dup2(fd[0], 0);
+	close(fd[0]);
 	close(fd[1]);
 	dup2(f2, 1);
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
-	dup2(f2, STDOUT_FILENO);
+	close(f2);
 	if ((data->cmd2.path != NULL)
 		&& (execve(data->cmd2.path, data->cmd2.args, envp) == -1))
 	{
 		perror("Error");
+		close(fd[0]);
+		close(fd[1]);
+		close(0);
+		close(1);
+		ft_free_all_data(data);
 		exit (-1);
 	}
-	close(f2);
 }
 
 void	pipex(t_data *data, char **av, char **envp)
@@ -78,7 +87,7 @@ void	pipex(t_data *data, char **av, char **envp)
 	if (pipe(fd) < 0)
 	{
 		perror("pipe");
-		exit (1);
+		exit (-1);
 	}
 	ft_get_argcs(data, av, envp);
 	pid1 = fork();
@@ -105,6 +114,7 @@ int	main(int ac, char **av, char **envp)
 	if (fd > 0)
 	{
 		ft_printf("cat: %s: Is a directory\n", av[1]);
+		close(fd);
 		exit(1);
 	}
 	pipex(&data, av, envp);
