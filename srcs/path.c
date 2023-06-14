@@ -17,6 +17,8 @@ char	**ft_get_paths(char **envp)
 	char	*path;
 	char	**all_paths;
 
+	path = NULL;
+	all_paths = NULL;
 	while (*envp)
 	{
 		if (ft_strncmp_pipex("PATH=", *envp, 5) == 0)
@@ -70,7 +72,7 @@ char	*ft_check_relative_paths(char **envp, char *args)
 	char	*valid_path;
 
 	temp_path = ft_get_paths(envp);
-	if (ft_isascii(temp_path[0][0]) == 0)
+	if (temp_path == NULL || (temp_path[0][0]) == 0)
 	{
 		write(2, "No such file or directory: ", 28);
 		write(2, args, ft_strlen(args));
@@ -98,3 +100,4 @@ char	*ft_check_paths(char **envp, char *args)
 	valid_path = ft_check_relative_paths(envp, args);
 	return (valid_path);
 }
+
